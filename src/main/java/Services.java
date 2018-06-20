@@ -25,7 +25,20 @@ public class Services {
     private String file = "sauvegarde.xml";
     
     public World readWorldFromXml(){
-        InputStream input=getClass().getClassLoader().getResourceAsStream(file);
+
+        JAXBContext jaxbContext;
+        try {
+            jaxbContext = JAXBContext.newInstance(World.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            File f = new File("world.xml");
+            world = (World) jaxbUnmarshaller.unmarshal(f);
+            
+           
+        } catch (JAXBException ex) {
+            System.out.println("Erreur lecture du fichier:"+ex.getMessage());
+            ex.printStackTrace();
+        }
+        
         return this.world;
     }
     
@@ -36,22 +49,15 @@ public class Services {
             Marshaller march = jaxbContext.createMarshaller();
             OutputStream output = new FileOutputStream(file);
             march.marshal(world, output);
-            
-            
+             
         }catch(IOException e){
             e.printStackTrace();
-        }
-        
+        } 
     }
     
-    public World getWorld() throws JAXBException{
-        JAXBContext jaxbContext;
-        jaxbContext = JAXBContext.newInstance(World.class);
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        File f = new File("world.xml");
-        world = (World) jaxbUnmarshaller.unmarshal(f);
-        
+    public World getWorld(){
         return world;
+        
     }
     
 }

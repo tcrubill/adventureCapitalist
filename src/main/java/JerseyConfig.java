@@ -1,6 +1,8 @@
 
 import javax.ws.rs.ApplicationPath;
+import static org.codehaus.plexus.archiver.zip.ExtraFieldUtils.register;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.stereotype.Component;
 
 
 /*
@@ -13,6 +15,7 @@ import org.glassfish.jersey.server.ResourceConfig;
  *
  * @author tcrubill
  */
+
 @Component
 @ApplicationPath("/adventureisis")
 public class JerseyConfig extends ResourceConfig {
@@ -20,3 +23,5 @@ public class JerseyConfig extends ResourceConfig {
         register(Webservices.class); 
     }
 }
+
+
