@@ -1,3 +1,5 @@
+package com.isis.adventureISIServer.capitalist;
+
 
 import generated.World;
 import java.io.File;
@@ -36,7 +38,7 @@ public class Services {
             System.out.println("Erreur lecture du fichier:"+ex.getMessage());
             ex.printStackTrace();
         }
-        return world;
+        return this.world;
 }
     
 public void saveWordlToXml(World world){
