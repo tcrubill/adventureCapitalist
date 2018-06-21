@@ -21,41 +21,38 @@ import javax.xml.bind.Unmarshaller;
  * @author tcrubill
  */
 public class Services {
-    World world = new World();
-    private String file = "sauvegarde.xml";
     
-    String path ="D:\\Users\\tcrubill\\Documents\\GitHub\\adventureCapitalist";
+    World world = new World();
+    
     public World readWorldFromXml(){
-
         JAXBContext jaxbContext;
-        try {
+
+        InputStream input = getClass().getClassLoader().getResourceAsStream("world.xml");
+         try {
             jaxbContext = JAXBContext.newInstance(World.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            File f = new File("worldProduct.xml");
-            world = (World) jaxbUnmarshaller.unmarshal(f);
-            
-           
+            world = (World) jaxbUnmarshaller.unmarshal(input);
         } catch (JAXBException ex) {
             System.out.println("Erreur lecture du fichier:"+ex.getMessage());
             ex.printStackTrace();
         }
-        
-        return this.world;
-    }
-
-    public void saveWordlToXml(World world) throws JAXBException{
-            JAXBContext jaxbContext;
-        try{
+        return world;
+}
+    
+public void saveWordlToXml(World world){
+        JAXBContext jaxbContext;
+        try {
+            OutputStream output = new FileOutputStream("world.xml");
             jaxbContext = JAXBContext.newInstance(World.class);
             Marshaller march = jaxbContext.createMarshaller();
-            OutputStream output = new FileOutputStream("world.xml");
-            march.marshal(this.world, output);
-             
-        }catch(IOException ex){
-            System.out.println("Erreur lecture du fichier:"+ex.getMessage());
+            march.marshal(world, output);
+        } catch (Exception ex) {
+            System.out.println("Erreur écriture du fichier:"+ex.getMessage());
             ex.printStackTrace();
-        } 
-    }
+        }
+        
+        
+}
     
     public World getWorld(){
         return world;
