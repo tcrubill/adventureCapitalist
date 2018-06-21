@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 @ApplicationPath("/adventureisis")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
-        JerseyConfig jc = new JerseyConfig();
-        jc.register(Webservice.class);
+        register(Webservice.class);
     }
 }

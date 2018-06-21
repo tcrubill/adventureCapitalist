@@ -27,7 +27,7 @@ public class Services {
     public World readWorldFromXml(){
         JAXBContext jaxbContext;
 
-        InputStream input = getClass().getClassLoader().getResourceAsStream("world.xml");
+        InputStream input = getClass().getClassLoader().getResourceAsStream("worldProduct.xml");
          try {
             jaxbContext = JAXBContext.newInstance(World.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -42,7 +42,7 @@ public class Services {
 public void saveWordlToXml(World world){
         JAXBContext jaxbContext;
         try {
-            OutputStream output = new FileOutputStream("world.xml");
+            OutputStream output = new FileOutputStream("worldProduct.xml");
             jaxbContext = JAXBContext.newInstance(World.class);
             Marshaller march = jaxbContext.createMarshaller();
             march.marshal(world, output);

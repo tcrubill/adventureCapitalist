@@ -23,7 +23,8 @@ public class Webservice
         services = new Services();
     }
     
-    @GET @Path("world") 
+    @GET
+    @Path("world") 
     @Produces(MediaType.APPLICATION_XML)
     public Response getWorld() {
         return Response.ok(services.getWorld()).build();
