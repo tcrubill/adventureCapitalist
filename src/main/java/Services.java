@@ -24,13 +24,14 @@ public class Services {
     World world = new World();
     private String file = "sauvegarde.xml";
     
+    String path ="D:\\Users\\tcrubill\\Documents\\GitHub\\adventureCapitalist";
     public World readWorldFromXml(){
 
         JAXBContext jaxbContext;
         try {
             jaxbContext = JAXBContext.newInstance(World.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            File f = new File("world.xml");
+            File f = new File("worldProduct.xml");
             world = (World) jaxbUnmarshaller.unmarshal(f);
             
            
@@ -41,13 +42,13 @@ public class Services {
         
         return this.world;
     }
-    
+
     public void saveWordlToXml(World world) throws JAXBException{
             JAXBContext jaxbContext;
         try{
             jaxbContext = JAXBContext.newInstance(World.class);
             Marshaller march = jaxbContext.createMarshaller();
-            OutputStream output = new FileOutputStream(file);
+            OutputStream output = new FileOutputStream("world.xml");
             march.marshal(this.world, output);
              
         }catch(IOException ex){
