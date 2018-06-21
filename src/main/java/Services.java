@@ -48,10 +48,11 @@ public class Services {
             jaxbContext = JAXBContext.newInstance(World.class);
             Marshaller march = jaxbContext.createMarshaller();
             OutputStream output = new FileOutputStream(file);
-            march.marshal(world, output);
+            march.marshal(this.world, output);
              
-        }catch(IOException e){
-            e.printStackTrace();
+        }catch(IOException ex){
+            System.out.println("Erreur lecture du fichier:"+ex.getMessage());
+            ex.printStackTrace();
         } 
     }
     
