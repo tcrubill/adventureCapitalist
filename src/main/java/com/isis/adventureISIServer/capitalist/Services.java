@@ -26,12 +26,16 @@ import javax.xml.bind.Unmarshaller;
  */
 public class Services {
     
-    World world = new World();
+    public World world = new World();
+    
+    public Services(){
+        readWorldFromXml();
+    }
     
     public World readWorldFromXml(){
         JAXBContext jaxbContext;
 
-        InputStream input = getClass().getClassLoader().getResourceAsStream("worldProduct.xml");
+        InputStream input = getClass().getClassLoader().getResourceAsStream("jaxb/world/world.xml");
          try {
             jaxbContext = JAXBContext.newInstance(World.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -46,7 +50,7 @@ public class Services {
 public void saveWordlToXml(World world){
         JAXBContext jaxbContext;
         try {
-            OutputStream output = new FileOutputStream("worldProduct.xml");
+            OutputStream output = new FileOutputStream("world.xml");
             jaxbContext = JAXBContext.newInstance(World.class);
             Marshaller march = jaxbContext.createMarshaller();
             march.marshal(world, output);
